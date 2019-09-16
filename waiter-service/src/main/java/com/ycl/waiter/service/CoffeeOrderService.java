@@ -43,7 +43,7 @@ public class CoffeeOrderService implements MeterBinder {
         return orderRepository.getOne(id);
     }
 
-    public CoffeeOrder createOrder(String customer, Coffee...coffee) {
+    public CoffeeOrder createOrder(String customer, Coffee... coffee) {
         CoffeeOrder order = CoffeeOrder.builder()
                 .customer(customer)
                 .items(new ArrayList<>(Arrays.asList(coffee)))
@@ -83,7 +83,7 @@ public class CoffeeOrderService implements MeterBinder {
         this.orderCounter = meterRegistry.counter("order.count");
     }
 
-    private Money calcTotal(Coffee...coffee) {
+    private Money calcTotal(Coffee... coffee) {
         List<Money> items = Stream.of(coffee).map(c -> c.getPrice())
                 .collect(Collectors.toList());
         return Money.total(items).multipliedBy(orderProperties.getDiscount())

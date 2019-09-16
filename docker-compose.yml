@@ -4,52 +4,52 @@ services:
   mysql:
     image: mysql
     expose:
-      - 3306
+    - 3306
     environment:
-      - MYSQL_DATABASE=springbucks 
-      - MYSQL_USER=springbucks 
-      - MYSQL_PASSWORD=springbucks 
-      - MYSQL_ROOT_PASSWORD=root_password
+    - MYSQL_DATABASE=springbucks
+    - MYSQL_USER=springbucks
+    - MYSQL_PASSWORD=springbucks
+    - MYSQL_ROOT_PASSWORD=root_password
 
   redis:
     image: redis
     expose:
-      - 6379
+    - 6379
 
   consul:
     image: consul
     expose:
-      - 8300
-      - 8301
-      - 8302
-      - 8400
-      - 8500
-      - 8600
+    - 8300
+    - 8301
+    - 8302
+    - 8400
+    - 8500
+    - 8600
 
   rabbitmq:
     image: rabbitmq:3.7-management
     expose:
-      - 5672
-      - 15672
+    - 5672
+    - 15672
     ports:
-      - 15672:15672
+    - 15672:15672
     environment:
-      - RABBITMQ_DEFAULT_USER=spring
-      - RABBITMQ_DEFAULT_PASS=spring
+    - RABBITMQ_DEFAULT_USER=spring
+    - RABBITMQ_DEFAULT_PASS=spring
 
   zipkin:
     image: openzipkin/zipkin
     depends_on:
-      - rabbitmq
+    - rabbitmq
     expose:
-      - 9411
+    - 9411
     ports:
-      - 9411:9411
+    - 9411:9411
     links:
-      - rabbitmq
+    - rabbitmq
     # Wait for rabbitmq - Can use wait-for-it instead.
     restart: always
     environment:
-      - RABBIT_ADDRESSES=rabbitmq:5672 
-      - RABBIT_USER=spring
-      - RABBIT_PASSWORD=spring
+    - RABBIT_ADDRESSES=rabbitmq:5672 
+    - RABBIT_USER=spring
+    - RABBIT_PASSWORD=spring

@@ -1,33 +1,59 @@
-# 注意 MySQL 与 H2 的语法差异
-# H2: drop table tbl if exists;
-# MySQL: drop table if exists tbl;
-drop table if exists t_coffee;
-drop table if exists t_order;
-drop table if exists t_order_coffee;
+/*
+ Navicat Premium Data Transfer
 
-create table t_coffee (
-    id bigint auto_increment,
-    create_time timestamp,
-    update_time timestamp,
-    name varchar(255),
-    price bigint,
-    primary key (id)
-);
+ Source Server         : 家政加测试
+ Source Server Type    : MySQL
+ Source Server Version : 50721
+ Source Host           : 172.19.70.132:3306
+ Source Schema         : yclxiaodb
 
-create table t_order (
-    id bigint auto_increment,
-    create_time timestamp,
-    update_time timestamp,
-    customer varchar(255),
-    waiter varchar(255),
-    barista varchar(255),
-    discount integer,
-    total bigint,
-    state integer,
-    primary key (id)
-);
+ Target Server Type    : MySQL
+ Target Server Version : 50721
+ File Encoding         : 65001
 
-create table t_order_coffee (
-    coffee_order_id bigint not null,
-    items_id bigint not null
-);
+ Date: 11/09/2019 20:22:17
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for t_coffee
+-- ----------------------------
+DROP TABLE IF EXISTS `t_coffee`;
+CREATE TABLE `t_coffee` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `name` varchar(255) DEFAULT NULL,
+  `price` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for t_order
+-- ----------------------------
+DROP TABLE IF EXISTS `t_order`;
+CREATE TABLE `t_order` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `customer` varchar(255) DEFAULT NULL,
+  `waiter` varchar(255) DEFAULT NULL,
+  `barista` varchar(255) DEFAULT NULL,
+  `discount` int(11) DEFAULT NULL,
+  `total` bigint(20) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for t_order_coffee
+-- ----------------------------
+DROP TABLE IF EXISTS `t_order_coffee`;
+CREATE TABLE `t_order_coffee` (
+  `coffee_order_id` bigint(20) NOT NULL,
+  `items_id` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+SET FOREIGN_KEY_CHECKS = 1;
